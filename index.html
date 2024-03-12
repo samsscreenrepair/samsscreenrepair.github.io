@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frog Bus Tracker</title>
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHyixppOq-ynz_8ec6MaaHlIZyr8nD8OM"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700&display=swap">
+    <style>
+        /* Apply MTD font to the header */
+        h1 {
+            font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>MTD Hydrogen Bus Tracker</h1>
+    <div id="map" style="height: 400px; width: 100%;"></div>
+
+    <script>
+        // Replace 'YOUR_API_KEY' with your actual API key obtained from the Champaign Urbana MTD API
+        const apiKey = '712ab1c8fe1d41e4af431190c4d344a3';
+        const busNumber1 = '2304';
+        const busNumber2 = '2305';
+        const busNumber3 = '2303';
+        const busNumber4 = '2101';
+        const busNumber5 = '2102';
+        const busNumber6 = '2306';
+        const frogIcon = {
+                        url: 'https://assets.petco.com/petco/image/upload/f_auto,q_auto/green-tree-frog-care-sheet-hero', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                        scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                        
+                };
+        const butterflyIcon = {
+                        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMd2Q4ZX88f0Z2QlTIoEpRzIVuPeV4BN_HBA&usqp=CAU', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                        scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                        
+                };
+        const foxIcon = {
+                        url: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Vulpes_vulpes_ssp_fulvus.jpg', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                        scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                        
+                };
+        const cardinalIcon = {
+                        url: 'https://cdn.britannica.com/23/188023-050-C1E4796B/cardinal-branch-songbird.jpg', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                        scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                        
+                };
+         const duckIcon = {
+                        url: 'https://www.collinsdictionary.com/images/full/duck_170690246.jpg', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                        scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                        
+                };
+        const beeIcon = {
+                url: 'https://media.istockphoto.com/id/888100500/vector/engraving-illustration-of-honey-bee.jpg?s=612x612&w=0&k=20&c=HmjIXOcsxc9nd8KIGS5y91cVz-4q5WwveahfyPRykOE=', // Replace 'path_to_your_frog_image.png' with the actual path to your frog image
+                scaledSize: new google.maps.Size(50, 50), // Adjust the size of the image as needed
+                
+                };
+        
+
+        // Initialize the map
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 40.1106, lng: -88.2073 }, // Center the map on Champaign-Urbana
+                zoom: 14,
+            });
+
+            // Fetch bus location and add marker
+            fetchBusLocation(busNumber1, duckIcon, 'Duck');
+            fetchBusLocation(busNumber2, frogIcon, 'Frog');
+            fetchBusLocation(busNumber3, cardinalIcon, 'Cardinal');
+            fetchBusLocation(busNumber4, foxIcon, 'Fox');
+            fetchBusLocation(busNumber5, butterflyIcon, 'Butterfly');
+            fetchBusLocation(busNumber6, beeIcon, 'Bee');
+            
+
+        }
+
+        function fetchBusLocation(busNumber, busIcon, busName) {
+            const apiUrl = `https://developer.mtd.org/api/v2.2/json/GetVehicle?vehicle_id=${busNumber}&key=${apiKey}`;
+            const data = 0
+            const response= 0
+            fetch(apiUrl)
+                .then(response => response.json())
+
+                .then(data => {   
+                    if (data.status.code === 200 && data.vehicles.length > 0) {
+                        console.log(data.vehicles)
+                        const vehicle = data.vehicles[0];
+                        const location = vehicle.location;
+                        const headsign = vehicle.trip.trip_headsign;
+                        const route = vehicle.trip.route_id;
+                        console.log(route);
+                        const direction = vehicle.trip.direction;
+                        
+                        const nextStop = vehicle.next_stop;
+                        const busLatLng = new google.maps.LatLng(location.lat, location.lon);
+                        let infoWindowContent = 0; 
+
+                        if (route == null){
+                            infoWindowContent = `<strong>Not In Service</strong><br/> <strong> Bus Number:</strong> ${busNumber} <br/> <strong> Livery:</strong> ${busName}` ;
+                        } else {
+                            infoWindowContent = `<strong>Route:</strong> ${route} ${direction} to ${headsign} <br/> <strong> Bus Number:</strong> ${busNumber}<br/> <strong> Livery:</strong> ${busName}`;
+                        }
+                      
+                        const busMarker = new google.maps.Marker({
+                    position: busLatLng,
+                    map: map,
+                    title: `Bus ${vehicle.vehicle_id}`,
+                    icon: busIcon, // Set the custom marker icon
+                });
+
+                // Create an InfoWindow with the bus headsign and next stop
+                
+                
+                const infoWindow = new google.maps.InfoWindow({
+                    content: infoWindowContent
+                });
+
+                // Show InfoWindow when marker is clicked
+                busMarker.addListener('click', function() {
+                    infoWindow.open(map, busMarker);
+                });
+
+
+                        map.setCenter(busLatLng); // Center the map on the bus location
+                    } else {
+                        console.log('Bus not found or API error.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching bus location:', error);
+                });
+        }
+        
+        // Call initMap() when the page is loaded
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+</body>
+</html>
