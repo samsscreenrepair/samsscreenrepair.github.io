@@ -54,12 +54,13 @@
 </head>
 <body>
     <h1 style="text-align: center; font-family: Arial;">MTD Hydrogen Bus Tracker</h1>
+    <p style="text-align: center; font-family: Arial"> Data provided by CUMTD</p>
+
     <div id="map"></div>
     <div id="bus-list">
         <h2>Active Buses</h2>
         <ul id="buses"></ul>
     </div>
-    <p style="text-align: center; font-family: Arial"> Data provided by CUMTD</p>
 
     <script>
         const apiKey = '712ab1c8fe1d41e4af431190c4d344a3';
@@ -86,9 +87,13 @@
 
             // Fetch bus locations and add markers
             fetchBusLocations();
+            setInterval(fetchBusLocations, 60000);
+
         }
 
         function fetchBusLocations() {
+            busList.innerHTML = ''; 
+
             busNumbers.forEach(busNumber => {
                 const apiUrl = `https://developer.mtd.org/api/v2.2/json/GetVehicle?vehicle_id=${busNumber}&key=${apiKey}`;
                 fetch(apiUrl)
