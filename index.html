@@ -87,12 +87,10 @@
 
             // Fetch bus locations and add markers
             fetchBusLocations();
-            setInterval(fetchBusLocations, 60000);
 
         }
 
         function fetchBusLocations() {
-            busList.innerHTML = ''; 
 
             busNumbers.forEach(busNumber => {
                 const apiUrl = `https://developer.mtd.org/api/v2.2/json/GetVehicle?vehicle_id=${busNumber}&key=${apiKey}`;
