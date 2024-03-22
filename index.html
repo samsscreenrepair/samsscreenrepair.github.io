@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTD Hydrogen Bus Tracker</title>
-    <!-- Include Leaflet CSS and JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
         #map {
             height: 300px;
-            width: 80%; /* Adjusted width for desktop */
-            margin: 0 auto; /* Center the map horizontally */
+            width: 80%; 
+            margin: 0 auto; 
             margin-bottom: 20px;
         }
         #bus-list {
@@ -60,6 +59,7 @@
         <h2>Active Buses</h2>
         <ul id="buses"></ul>
     </div>
+    <p style="text-align: center; font-family: Arial"> Data provided by CUMTD</p>
 
     <script>
         const apiKey = '712ab1c8fe1d41e4af431190c4d344a3';
