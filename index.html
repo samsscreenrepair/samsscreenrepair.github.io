@@ -119,7 +119,7 @@
                                     const busMarker = L.marker(busLatLng, { icon: busIcon }).addTo(map);
                                     let infoWindowContent;
 
-                                    if (route == null && (closestIntersection == "East University Avenue" || closestIntersection == "North Lynn Street" || closestIntersection == North Webber Street")) {
+                                    if (route == null && (closestIntersection == "East University Avenue" || closestIntersection == "North Lynn Street" || closestIntersection == "North Webber Street")) {
                                         infoWindowContent = ` <strong>Bus Number:</strong> ${busNumber}<br/> <strong>Livery:</strong> ${livery} <br /><strong>Not In Service - At Garage</strong>`;
                                     }
 									else if (route == null && closestIntersection != "East University Avenue"){
