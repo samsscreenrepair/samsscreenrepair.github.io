@@ -64,15 +64,16 @@
 
     <script>
         const apiKey = '712ab1c8fe1d41e4af431190c4d344a3';
-        const busNumbers = ['2304', '2305', '2303', '2101', '2102', '2306'];
+        const busNumbers = ['2303','2304', '2305', '2307', '2101', '2102', '2309'];
         const icons = {
             '2304': 'https://www.collinsdictionary.com/images/full/duck_170690246.jpg',
             '2305': 'https://assets.petco.com/petco/image/upload/f_auto,q_auto/green-tree-frog-care-sheet-hero',
-            '2306': 'https://cdn.britannica.com/23/188023-050-C1E4796B/cardinal-branch-songbird.jpg',
+            '2303': 'https://cdn.britannica.com/23/188023-050-C1E4796B/cardinal-branch-songbird.jpg',
             '2101': 'https://upload.wikimedia.org/wikipedia/commons/3/30/Vulpes_vulpes_ssp_fulvus.jpg',
             '2102': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMd2Q4ZX88f0Z2QlTIoEpRzIVuPeV4BN_HBA&usqp=CAU',
-            '2303': 'https://media.istockphoto.com/id/888100500/vector/engraving-illustration-of-honey-bee.jpg?s=612x612&w=0&k=20&c=HmjIXOcsxc9nd8KIGS5y91cVz-4q5WwveahfyPRykOE='
-        };
+            '2307': 'https://media.istockphoto.com/id/888100500/vector/engraving-illustration-of-honey-bee.jpg?s=612x612&w=0&k=20&c=HmjIXOcsxc9nd8KIGS5y91cVz-4q5WwveahfyPRykOE='
+       	    '2309': 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FEastern_gray_squirrel&psig=AOvVaw1c4yyrmMnqYqHrgI4y0k3q&ust=1713657452766000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKDlppi-z4UDFQAAAAAdAAAAABAE'
+	};
 
         let map;
         let busList = document.getElementById('buses');
@@ -159,17 +160,20 @@
 			if(busNumber == 2304){
 			return "Duck"
 			}
-			if(busNumber == 2306){
-			return "Cardinal"
+			if(busNumber == 2307){
+			return "Bee"
 			}
 			if(busNumber == 2303){
-			return "Bee"
+			return "Cardinal"
 			}
 			if(busNumber == 2101){
 			return "Fox"
 			}
 			if(busNumber == 2102){
 			return "Butterfly"
+			}
+			if(busNumber == 2309){
+			return "Squirrel"
 			}
             
         }
