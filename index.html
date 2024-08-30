@@ -64,7 +64,7 @@
 
     <script>
         const apiKey = '712ab1c8fe1d41e4af431190c4d344a3';
-        const busNumbers = ['2304','2305', '2306', '2307', '2308', '2309', '2311', '2101', '2102', '2309'];
+        const busNumbers = ['2304','2305', '2306', '2307', '2308', '2309', '2310', '2311', '2312', '2313', '2101', '2102'];
         const icons = {
             '2304': 'https://www.collinsdictionary.com/images/full/duck_170690246.jpg',
             '2305': 'https://assets.petco.com/petco/image/upload/f_auto,q_auto/green-tree-frog-care-sheet-hero',
@@ -74,7 +74,10 @@
             '2307': 'https://media.istockphoto.com/id/888100500/vector/engraving-illustration-of-honey-bee.jpg?s=612x612&w=0&k=20&c=HmjIXOcsxc9nd8KIGS5y91cVz-4q5WwveahfyPRykOE=',
 	    '2308': 'https://www.havahart.com/media/wysiwyg/hh/cms/lc/rabbits/hh-animals-rabbit-1.png',
        	    '2309': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/EasternGraySquirrel_GAm.jpg/800px-EasternGraySquirrel_GAm.jpg',
-	    '2311': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/White-tailed_deer.jpg/640px-White-tailed_deer.jpg'
+	    '2311': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/White-tailed_deer.jpg/640px-White-tailed_deer.jpg',
+	    '2310' : 'https://i.natgeofe.com/k/e1365545-00c1-4d2a-9a8a-5226dc98edb8/groundhog-sitting-up_3x4.jpg',
+	    '2312' : 'https://c2.staticflickr.com/6/5047/5361232433_eb47a64836_b.jpg',
+	    '2313' : 'https://i.natgeofe.com/n/17b58cb7-fb9e-46d9-a281-5c655f515478/naturepl_01497796sized_square.jpg'
 	};
 
         let map;
@@ -183,6 +186,16 @@
 			if(busNumber == 2311){
 			return "Deer"
 			}
+		if(busNumber == 2310){
+			return "Groundhog"
+			}
+		if(busNumber == 2312){
+			return "Owl"
+			}
+		if(busNumber == 2313){
+			return "Preying Mantis"
+			}
+		
             
         }
 
